@@ -5,11 +5,12 @@
 #  15 ...                 30
 # 31 ...                   62
 
+from random import randint
+
 class Heap():
     def __init__(self, input = []):
         assert type(input) == list
         self.list_form = input
-        print('hey')
     def row_limits(self, m):
         return [2 ** m - 1, 2 ** (m+1) - 2]
     def what_row(self, i):
@@ -28,18 +29,22 @@ class Heap():
         return [self.what_row(i), self.what_col(i)]
     def parent(self, i):
         return int((i - 1) / 2)
+    def add(self, k):
+        i = len(self.list_form)
+        i_parent = self.parent(i)
+        if len(self.list_form) > 0:
+            k_parent = self.list_form[i_parent]
+        self.list_form += [k]
+        if len(self.list_form) > 1:
+            if k > k_parent:
+                self.swap(i, i_parent)
+    def swap(self, i, j):
+        ki = self.list_form[i]
+        kj = self.list_form[j]
+        self.list_form[i] = kj
+        self.list_form[j] = ki
 
 h = Heap()
-print(h.list_form)
-
-for m in range(7):
-    print(h.row_limits(m))
-print()
-
-for k in [10, 20, 70, 700, 7, 8, 9, 11, 12, 13, 14]:
-    print(k)
-    print(h.what_coords(k))
-    print(h.parent(k))
-    print(h.what_coords(h.parent(k)))
-    print()
-print('done')
+for v in [99, 5, 2, 3, 7, 20]:
+    h.add(v)
+    print(h.list_form)
