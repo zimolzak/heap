@@ -21,19 +21,20 @@ class Heap():
         self.list_form += [k]
         if len(self.list_form) > 1:
             while k > k_parent:
-                self.swap(i, i_parent)
+                self._swap(i, i_parent)
                 i = i_parent
                 i_parent = self.parent(i)
                 k = self.list_form[i]
                 k_parent = self.list_form[i_parent]
-    def swap(self, i, j):
+    def _swap(self, i, j):
         ki = self.list_form[i]
         kj = self.list_form[j]
         self.list_form[i] = kj
         self.list_form[j] = ki
 
-h = Heap()
-for x in range(15):
-    v = randint(0,100)
-    h.add(v)
-    print(h.list_form)
+if __name__ == '__main__':
+    h = Heap()
+    for x in range(15):
+        v = randint(0,100)
+        h.add(v)
+        print(h.list_form)
