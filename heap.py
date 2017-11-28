@@ -11,22 +11,6 @@ class Heap():
     def __init__(self, input = []):
         assert type(input) == list
         self.list_form = input
-    def row_limits(self, m):
-        return [2 ** m - 1, 2 ** (m+1) - 2]
-    def what_row(self, i):
-        assert i >= 0
-        m_test = 0
-        while(True):
-            [i_low, i_high] = self.row_limits(m_test)
-            if i_low <= i <= i_high:
-                return m_test
-            m_test += 1
-    def what_col(self, i):
-        m = self.what_row(i)
-        [low, high] = self.row_limits(m)
-        return i - low
-    def what_coords(self, i):
-        return [self.what_row(i), self.what_col(i)]
     def parent(self, i):
         return int((i - 1) / 2)
     def add(self, k):
